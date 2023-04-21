@@ -89,28 +89,73 @@ const PokemonStore = `[
 
 
     ]`;
-    function Additem(n,m) {
-   
-        console.log(n);
-     
+
+
+const carrito = [];
+
+//anadir un item al carrito
+function Additem(n,m) {
+    var price1 = m;
+    var cantidad1 = 0;
+
+    console.log(n);
+    console.log(m);
+
+    if (carrito.find( item => item.name === n)) { 
+
+        cantidad1 = (carrito.find(item => item.name === n).cantidad) + 1;
+        price1 = m*cantidad1;
+
+        carrito.find(item => item.name === n).price = price1; 
+        carrito.find(item => item.name === n).cantidad = cantidad1; 
+
+        /*let pkmnItem = {
+            name: n,
+            price: m,
+            cantidad: 1
+        };*/
+
+        
+
     }
+    else{
+
+        let pkmnItem = {
+            name: n,
+            price: m,
+            cantidad: 1
+        };
+
+        carrito.push(pkmnItem);
+    }
+    console.log(carrito);
+    
+
+}
+//display carrito
+
+
 const PokemonData = JSON.parse(PokemonStore);
 console.log(PokemonData);
+
+//generar tarjetas con json
 window.onload = function () {
     var con = document.getElementById("container");
     for (let i = 0; i < PokemonData.length; i++) {
-        
+
         const div = document.createElement("div");
         div.className = "card";
+
         div.innerHTML = `
-            <img src="${PokemonData[i].image}" alt="bulbasaur" width="200px">
+            <img src = "${PokemonData[i].image}" alt = "bulbasaur" width="200px">
             <h2 class="title">${PokemonData[i].name}</h2>
             <p class="subtitle">Price: $${PokemonData[i].price} </p>
             <p class="description">
             ${PokemonData[i].description}
             </p>
-            <button class="btn" onclick="Additem('${PokemonData[i].name},${PokemonData[i].price}')">Agregar al carrito</button>
+            <button class="btn" onclick="Additem('${PokemonData[i].name}','${PokemonData[i].price}')">Agregar al carrito</button>
             `;
+
         con.appendChild(div);
     }
 };
