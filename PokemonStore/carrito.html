@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    
+    <title>Pokemon Store</title>
+</head>
+
+<body>
+    <nav>
+        <div class="logo">
+            <img src="./pokeball.png" alt="logo" width="55px">
+        </div>
+        <ul>
+            <li><a href="index.html">Aqui no se que va</a></li>
+            <li><a href="about.html">Y aqui tampoco</a></li>
+            <li><a href="carrito.html" onclick="addPokemon()">Aqui va el carrito</a></li>
+        </ul>
+    </nav>
+    <main>
+        <div class="welcome">
+            <h1>
+                ¡Tu carrito!
+            </h1>
+            <p>
+                ¡Aquí puedes proceder a pagar los Pokémon en tu carrito!
+            </p>
+        </div>
+        <div id="container">
+
+        </div>
+
+    </main>
+
+</body>
+
+<script>
+var total = 0;
+const carritoAlmacenado = JSON.parse(localStorage.getItem("carrito"));
+console.log(carritoAlmacenado);
+
+carritoAlmacenado.forEach(item => {
+  total=parseInt(total)+parseInt(item.price);
+});
+
+
+console.log(total);
+
+window.onload = function () {
+    var con = document.getElementById("container");
+    
+
+        
+
+    for (let i = 0; i < carritoAlmacenado.length; i++) {
+
+        const div = document.createElement("div");
+        div.className = "card";
+
+        div.innerHTML = `
+            <img src = "${carritoAlmacenado[i].img}" alt = "bulbasaur" width="200px">
+            <h2 class="title">${carritoAlmacenado[i].name}</h2>
+            <p class="subtitle">subtotal: $${carritoAlmacenado[i].price}</p>
+            <p class="cantidad">cantidad:${carritoAlmacenado[i].cantidad}</p>
+            <button class="btn" onclick="addCant('${carritoAlmacenado[i].name}')">+</button>
+            <button class="btn" onclick="minusCant('${carritoAlmacenado[i].name}')">-</button>
+            <button class="btn" onclick="borrar('${carritoAlmacenado[i].name}')">Eliminar</button>
+            `;
+
+        con.appendChild(div);
+    }
+    
+    const div = document.createElement("div");
+        div.className = "total";
+        var tot = document.getElementById("pago");
+        div.innerHTML = `<h2 class="total">$${total}</h2>`;
+        tot.appendChild(div);
+
+};
+
+function addCant(nombre){
+    cantidad=parseInt(carritoAlmacenado.find(item => item.name === nombre).cantidad);
+    precio=parseInt(carritoAlmacenado.find(item => item.name === nombre).price);
+
+    carritoAlmacenado.find(item => item.name === nombre).cantidad++; 
+    carritoAlmacenado.find(item => item.name === nombre).price = parseInt(precio) + parseInt(precio/cantidad);
+
+    localStorage.setItem("carrito",JSON.stringify(carritoAlmacenado));
+    location.reload(true);
+}
+
+function minusCant(nombre){
+    cantidad=parseInt(carritoAlmacenado.find(item => item.name === nombre).cantidad);
+    precio=parseInt(carritoAlmacenado.find(item => item.name === nombre).price);
+    
+        
+
+        if(carritoAlmacenado.find(item => item.name === nombre).cantidad == 1){
+            localStorage.setItem("carrito",JSON.stringify(carritoAlmacenado.filter(elemento => elemento.name !== nombre)));
+            location.reload(true);
+        }else{
+            carritoAlmacenado.find(item => item.name === nombre).cantidad--; 
+            carritoAlmacenado.find(item => item.name === nombre).price = parseInt(precio) - parseInt(precio/cantidad);
+            localStorage.setItem("carrito",JSON.stringify(carritoAlmacenado));
+            location.reload(true);
+        }
+    
+    
+    
+    
+}
+
+ function borrar(nombre){
+
+    localStorage.setItem("carrito",JSON.stringify(carritoAlmacenado.filter(elemento => elemento.name !== nombre)));
+    location.reload(true);
+    
+    
+}
+
+</script>
+
+</html>

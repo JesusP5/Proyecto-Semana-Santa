@@ -90,13 +90,14 @@ const PokemonStore = `[
 
     ]`;
 
-
-const carrito = [];
+    //const carritoAlmacenado = JSON.parse(localStorage.getItem("carrito"));
+    const carrito = [];
 
 //anadir un item al carrito
 function Additem(n,m) {
     var price1 = m;
     var cantidad1 = 0;
+    var img1="";
 
     console.log(n);
     console.log(m);
@@ -108,7 +109,6 @@ function Additem(n,m) {
 
         carrito.find(item => item.name === n).price = price1; 
         carrito.find(item => item.name === n).cantidad = cantidad1; 
-
         /*let pkmnItem = {
             name: n,
             price: m,
@@ -119,20 +119,25 @@ function Additem(n,m) {
 
     }
     else{
-
+        const PokemonData = JSON.parse(PokemonStore);
+        var img1 = PokemonData.find(item => item.name === n).image;
         let pkmnItem = {
             name: n,
             price: m,
+            img:  img1,
             cantidad: 1
         };
 
         carrito.push(pkmnItem);
     }
     console.log(carrito);
+
+    localStorage.setItem("carrito",JSON.stringify(carrito));
     
 
 }
 //display carrito
+
 
 
 const PokemonData = JSON.parse(PokemonStore);
