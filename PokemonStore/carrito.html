@@ -16,9 +16,9 @@
             <img src="./pokeball.png" alt="logo" width="55px">
         </div>
         <ul>
-            <li><a href="index.html">Aqui no se que va</a></li>
-            <li><a href="about.html">Y aqui tampoco</a></li>
-            <li><a href="carrito.html" onclick="addPokemon()">Aqui va el carrito</a></li>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="about.html">Mis pedidos</a></li>
+            <li><a href="carrito.html" onclick="addPokemon()"><img src="/PokemonStore/whitecar.png" width="40"  /><span id="contador-carrito">0</span></a></li>
         </ul>
     </nav>
     <main>
@@ -33,22 +33,32 @@
         <div id="container">
 
         </div>
-
+        <div class="total-box">
+            <h2>Total</h2>
+            <p id="total-amount">$0.00</p>
+            <button class="btn-pago">Pagar</button>
+          </div>
     </main>
 
 </body>
 
 <script>
 var total = 0;
+var cantidadtotal = 0;
 const carritoAlmacenado = JSON.parse(localStorage.getItem("carrito"));
 console.log(carritoAlmacenado);
 
 carritoAlmacenado.forEach(item => {
   total=parseInt(total)+parseInt(item.price);
+  document.getElementById("total-amount").innerHTML = "$"+total;
+  cantidadtotal=parseInt(cantidadtotal)+parseInt(item.cantidad);
+  document.getElementById("contador-carrito").innerText = cantidadtotal;
 });
 
 
+
 console.log(total);
+
 
 window.onload = function () {
     var con = document.getElementById("container");
@@ -78,7 +88,7 @@ window.onload = function () {
         div.className = "total";
         var tot = document.getElementById("pago");
         div.innerHTML = `<h2 class="total">$${total}</h2>`;
-        tot.appendChild(div);
+        
 
 };
 
@@ -91,6 +101,7 @@ function addCant(nombre){
 
     localStorage.setItem("carrito",JSON.stringify(carritoAlmacenado));
     location.reload(true);
+    
 }
 
 function minusCant(nombre){

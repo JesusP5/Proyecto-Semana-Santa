@@ -93,6 +93,7 @@ const PokemonStore = `[
     //const carritoAlmacenado = JSON.parse(localStorage.getItem("carrito"));
     const carrito = [];
 
+
 //anadir un item al carrito
 function Additem(n,m) {
     var price1 = m;
@@ -115,8 +116,6 @@ function Additem(n,m) {
             cantidad: 1
         };*/
 
-        
-
     }
     else{
         const PokemonData = JSON.parse(PokemonStore);
@@ -127,18 +126,18 @@ function Additem(n,m) {
             img:  img1,
             cantidad: 1
         };
-
+        
         carrito.push(pkmnItem);
     }
     console.log(carrito);
-
     localStorage.setItem("carrito",JSON.stringify(carrito));
-    
-
+    let cantidadtotal=0;
+    for(let i = 0; i < carrito.length; i++){
+        cantidadtotal += carrito[i].cantidad;
+    }
+    document.getElementById("contador-carrito").innerText = cantidadtotal;
 }
 //display carrito
-
-
 
 const PokemonData = JSON.parse(PokemonStore);
 console.log(PokemonData);
@@ -164,4 +163,5 @@ window.onload = function () {
         con.appendChild(div);
     }
 };
+//Aumenta contador al carrito
 

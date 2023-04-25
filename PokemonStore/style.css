@@ -123,3 +123,34 @@ main #container {
     width: 100%;
     margin-top: 20px;
 }
+.total-box {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .total-box h2 {
+    color: #333;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .total-amount {
+    color: #00bfff;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 0;
+  }
+  .total-box .btn-pago{
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    margin: auto;
+    cursor: pointer;
+  }
