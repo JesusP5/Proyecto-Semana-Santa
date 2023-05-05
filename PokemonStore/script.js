@@ -91,7 +91,7 @@ const PokemonStore = `[
     ]`;
 
     //const carritoAlmacenado = JSON.parse(localStorage.getItem("carrito"));
-    const carrito = [];
+    const carrito = JSON.parse(localStorage.getItem("carrito"));
 
 
 //anadir un item al carrito
@@ -129,15 +129,19 @@ function Additem(n,m) {
         
         carrito.push(pkmnItem);
     }
+
     console.log(carrito);
     localStorage.setItem("carrito",JSON.stringify(carrito));
+
     let cantidadtotal=0;
     for(let i = 0; i < carrito.length; i++){
         cantidadtotal += carrito[i].cantidad;
     }
+
     document.getElementById("contador-carrito").innerText = cantidadtotal;
 }
-//display carrito
+
+//cargar catalogo
 
 const PokemonData = JSON.parse(PokemonStore);
 console.log(PokemonData);

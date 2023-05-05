@@ -13,12 +13,12 @@
 <body>
     <nav>
         <div class="logo">
-            <img src="./pokeball.png" alt="logo" width="55px">
+            <img src="images/pokeball.png" alt="logo" width="55px">
         </div>
         <ul>
             <li><a href="index.html">Inicio</a></li>
-            <li><a href="about.html">Mis pedidos</a></li>
-            <li><a href="carrito.html" onclick="addPokemon()"><img src="/PokemonStore/whitecar.png" width="40"  /><span id="contador-carrito">0</span></a></li>
+            
+            <li><a href="carrito.html" onclick="addPokemon()"><img src="images/carrito-de-compras.png" width="40"  /><span id="contador-carrito">0</span></a></li>
         </ul>
     </nav>
     <main>
@@ -36,7 +36,7 @@
         <div class="total-box">
             <h2>Total</h2>
             <p id="total-amount">$0.00</p>
-            <button class="btn-pago">Pagar</button>
+            <button class="btn-pago" onclick="pagar()">Pagar</button>
           </div>
     </main>
 
@@ -105,8 +105,8 @@ function addCant(nombre){
 }
 
 function minusCant(nombre){
-    cantidad=parseInt(carritoAlmacenado.find(item => item.name === nombre).cantidad);
-    precio=parseInt(carritoAlmacenado.find(item => item.name === nombre).price);
+    cantidad = parseInt(carritoAlmacenado.find(item => item.name === nombre).cantidad);
+    precio = parseInt(carritoAlmacenado.find(item => item.name === nombre).price);
     
         
 
@@ -131,6 +131,14 @@ function minusCant(nombre){
     location.reload(true);
     
     
+}
+
+function pagar(){
+
+    let carrVacio = [];
+    localStorage.setItem("carrito",JSON.stringify(carrVacio));
+    alert("Gracias por su compra");
+    location.reload(true);
 }
 
 </script>
